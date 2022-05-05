@@ -11,7 +11,7 @@ import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
     declarations: [
-           SignupComponent,
+      SignupComponent,
       LoginComponent,
       ForgotPasswordComponent,
       ResetPasswordComponent

@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LoginComponent } from './login/login.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
+
   {
     path: '',
     children: [
@@ -20,22 +22,10 @@ const routes: Routes = [
         path: 'forgot-password',
         component: ForgotPasswordComponent,
       },
-      // {
-      //   path: 'otp-verify',
-      //   component: OTPVerifyComponent,
-      // },
-      // {
-      //   path: 'reset-password',
-      //   component: ResetPassComponent,
-      // },
-      // {
-      //   path: 'age-verify',
-      //   component: AgeVerifyComponent,
-      // },
-      // {
-      //   path: 'age-verify-fail',
-      //   component: AgeVerifyFailComponent,
-      // },
+      {
+        path: 'reset-password',
+        component: ResetPasswordComponent,
+      }
     ],
   }
 ];
