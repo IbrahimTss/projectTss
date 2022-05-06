@@ -1,1 +1,68 @@
-<p>signup works!</p>
+<div fxLayoutAlign="center center " fxFlexFill>
+  <mat-card fxFlex="40">
+    <mat-toolbar><span class="title-center">SignUp Page</span></mat-toolbar>
+    <form [formGroup]="dataForm" fxLayoutAlign="stretch" fxLayout="column">
+      <mat-form-field>
+        <!-- <mat-label>Favorite food</mat-label> -->
+        <input
+          matInput
+          placeholder="Name"
+          class="form-control"
+          name="name"
+          formControlName="name"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <!-- <mat-label>Favorite food</mat-label> -->
+        <input
+          matInput
+          type="email"
+          placeholder="Email"
+          class="form-control"
+          name="email"
+          formControlName="email"
+          required
+          email
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <!-- <mat-label>Favorite food</mat-label> -->
+        <input
+          matInput
+          type="number"
+          placeholder="Mobile"
+          class="form-control"
+          name="number"
+          formControlName="mobile"
+          required
+          minlength="10"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <!-- <mat-label>Favorite food</mat-label> -->
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          class="form-control"
+          name="password"
+          formControlName="password"
+          required
+          minlength="8"
+        />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="dataForm.invalid"
+        (click)="signup()"
+      >
+        SignUp
+      </button>
+    </form>
+  </mat-card>
+</div>
