@@ -6,7 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from './users/user.module';
 import { UserDetailComponent } from './dash-board/user-detail/user-detail.component';
 import { NavbarComponent } from './dash-board/navbar/navbar.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './dash-board/auth.guard';
 // import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
@@ -14,6 +15,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSortModule} from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -35,9 +37,11 @@ import {MatSortModule} from '@angular/material/sort';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSortModule
+    MatSortModule,
+    HttpClientModule,
+    MatButtonModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
