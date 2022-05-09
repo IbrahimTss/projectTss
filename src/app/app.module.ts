@@ -8,7 +8,7 @@ import { UserDetailComponent } from './dash-board/user-detail/user-detail.compon
 import { NavbarComponent } from './dash-board/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './dash-board/auth.guard';
-// import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -30,7 +30,7 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    // MatToolbarModule,
+    MatToolbarModule,
     UserModule,
     MatIconModule,
     MatTableModule,

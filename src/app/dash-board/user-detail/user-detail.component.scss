@@ -7,6 +7,10 @@
   }
   
   .mat-form-field {
-    font-size: 14px;
+    font-size: 20px;
     width: 100%;
+  }
+
+  th.mat-header-cell, td.mat-cell, td.mat-footer-cell{
+    padding: 8px;
   }

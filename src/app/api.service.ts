@@ -36,9 +36,7 @@ export class ApiService {
     )
   }
 
-  // editdata(data : any,id:number){
-  //   return this.http.put<any>("http://192.168.0.121:3050/crud/"+id,data)
-  // }
+
 
   deleteproduct(id:number){
     return this.http.delete<any>("http://192.168.0.121:3350/signapi/"+id)
