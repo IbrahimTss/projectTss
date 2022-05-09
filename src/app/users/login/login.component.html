@@ -3,34 +3,27 @@
     <mat-toolbar><span class="title-center">Login Page</span></mat-toolbar>
     <form [formGroup]="loginForm" fxLayoutAlign="stretch" fxLayout="column">
       <mat-form-field>
-        <!-- <mat-label>Favorite food</mat-label> -->
         <input
           matInput
           placeholder="Email"
-          class="form-control"
           name="email"
           formControlName="email"
-          required
-          email
         />
       </mat-form-field>
       <mat-form-field>
-        <!-- <mat-label>Favorite food</mat-label> -->
         <input
           matInput
           type="password"
           placeholder="Password"
-          class="form-control"
           name="password"
           formControlName="password"
-          required
-          minlength="6"
-          maxlength="8"
         />
       </mat-form-field>
       <div class="row my-3">
         <a class="col" routerLink="/signup">Don't have an account</a>
-        <a class="col text-end" routerLink="/forgot-password">Forgot Password</a>
+        <a class="col text-end" routerLink="/forgot-password"
+          >Forgot Password</a
+        >
       </div>
       <button
         mat-raised-button

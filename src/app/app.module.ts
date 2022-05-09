@@ -16,15 +16,16 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSortModule} from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
-
-
-
+import { EditDetailsComponent } from './dash-board/edit-details/edit-details.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    EditDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSortModule,
     HttpClientModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

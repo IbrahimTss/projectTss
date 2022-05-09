@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Update Form</h1>
+<div mat-dialog-content>
+  <form [formGroup]="editForm">
+    <mat-form-field>
+      <input matInput placeholder="Name" name="name" formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
+        placeholder="Email"
+        name="email"
+        formControlName="email"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        placeholder="Mobile"
+        name="number"
+        formControlName="mobile"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        placeholder="Password"
+        name="password"
+        formControlName="password"
+      />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-action [align]="'end'">
+  <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+  <button
+    mat-raised-button
+    color="primary"
+    style="margin-left: 10px"
+    (click)="saveForm()"
+  >
+    Save
+  </button>
+</div>
