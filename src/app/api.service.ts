@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ApiService {
+  showSuccess(arg0: string, arg1: string) {
+    throw new Error('Method not implemented.');
+  }
   login() {
     throw new Error('Method not implemented.');
   }

@@ -20,6 +20,7 @@ import { EditDetailsComponent } from './dash-board/edit-details/edit-details.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -18,16 +18,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(8)]),
     });
   }
-  // login() {
-  //   if(this.loginForm.valid){
-  //   console.log(this.loginForm.value);
-  //   const value = localStorage.setItem(
-  //     'token',
-  //     JSON.stringify(this.loginForm.value)
-  //   );
-  //   this.router.navigate(['/navbar'])
-  //   }
-  // }
+//  api login 
   login() : void{
     if(this.loginForm.valid){
 
@@ -37,7 +28,7 @@ export class LoginComponent implements OnInit {
           
           if(res){
             this.loginForm.valid === true
-            // this.api.showSuccess('','login sucessfully ')
+            this.api.showSuccess('','login sucessfully ')
             localStorage.setItem('userData', JSON.stringify(res))
             this.router.navigate(["/navbar"])
 
