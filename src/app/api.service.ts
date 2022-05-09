@@ -7,46 +7,42 @@ import { environment as env } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
   login() {
     throw new Error('Method not implemented.');
   }
 
-  constructor(private http : HttpClient,private router:Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
-  putdata(data : any){
-    return this.http.post<any>("http://192.168.0.121:3350/signapi",data)
-
+  putdata(data: any) {
+    return this.http.post<any>('http://192.168.0.121:3350/signapi', data);
   }
 
-  getAlldata(){
-    return this.http.get<any>("http://192.168.0.121:3350/signapi")
-
-  }
- 
-  getdata(data : any){
-    return this.http.get<any>("http://192.168.0.121:3350/signapi").pipe(
-    map((resp : any) => {
-      return resp.find((i: any) =>
-        i.email === data.email && i.password === data.password,
-               )
-    })
-    )
+  getAlldata() {
+    return this.http.get<any>('http://192.168.0.121:3350/signapi');
   }
 
-  // editdata(data : any,id:number){
-  //   return this.http.put<any>("http://192.168.0.121:3050/crud/"+id,data)
-  // }
-
-  deleteproduct(id:number){
-    return this.http.delete<any>("http://192.168.0.121:3350/signapi/"+id)
+  getdata(data: any) {
+    return this.http.get<any>('http://192.168.0.121:3350/signapi').pipe(
+      map((resp: any) => {
+        return resp.find(
+          (i: any) => i.email === data.email && i.password === data.password
+        );
+      })
+    );
   }
 
- 
+  editdata(data: any, id: number) {
+    return this.http.put<any>('http://192.168.0.121:3350/signapi/' + id, data);
+  }
+
+  deleteproduct(id: number) {
+    return this.http.delete<any>('http://192.168.0.121:3350/signapi/' + id);
+  }
+
   // showSuccess(message : string, title : string) {
   //   this.toastr.success(message,title);
   // }
-
 }
