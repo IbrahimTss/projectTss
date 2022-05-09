@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error: () => {
-          this.toastr.showError('Somthing went wrong!', 'Error');
+          this.toastr.showError('Check your network', 'Error');
         },
       });
     }
