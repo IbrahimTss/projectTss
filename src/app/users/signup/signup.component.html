@@ -1,49 +1,75 @@
 <div fxLayoutAlign="center center " fxFlexFill>
   <mat-card fxFlex="40">
     <mat-toolbar><span class="title-center">SignUp Page</span></mat-toolbar>
-    <form [formGroup]="dataForm"  fxLayoutAlign="stretch" fxLayout="column">
-      <mat-form-field>
-        <input matInput placeholder="Name" name="name" formControlName="name"/>
+    <form [formGroup]="dataForm" fxLayoutAlign="stretch" fxLayout="column">
+
+      <!-- name field  -->
+
+      <mat-form-field class="mb-2">
+        <input matInput placeholder="Name" name="name" formControlName="name" />
+
+        <mat-error *ngIf="dataForm.controls['name'].hasError('required') &&
+        dataForm.controls['name'].touched">
+          <h6>Please enter your name</h6>
+        </mat-error>
+
+        <mat-error *ngIf="!dataForm.controls['name'].hasError('required') &&
+        dataForm.controls['name'].hasError('pattern')">
+          <h6>Numbers and speacial char not allowed</h6>
+        </mat-error>
       </mat-form-field>
 
-      <mat-form-field>
-        <input
-          matInput
-          type="email"
-          placeholder="Email"
-          name="email"
-          formControlName="email"
-        />
+      <!-- email field  -->
+
+      <mat-form-field class="mb-2">
+        <input matInput type="email" placeholder="Email" name="email" formControlName="email" />
+
+        <mat-error *ngIf="dataForm.controls['email'].hasError('required') &&
+        dataForm.controls['email'].touched">
+          <h6>Please enter your email address</h6>
+        </mat-error>
+
+        <mat-error *ngIf="!dataForm.controls['email'].hasError('required') &&
+        dataForm.controls['email'].hasError('pattern')">
+          <h6>Field @ required</h6>
+        </mat-error>
+        
       </mat-form-field>
 
-      <mat-form-field>
-        <input
-          matInput
-          type="number"
-          placeholder="Mobile"
-          name="number"
-          formControlName="mobile"
-        />
-      </mat-form-field>
+      <!-- mobile number field  -->
 
       <mat-form-field>
-        <input
-          matInput
-          type="password"
-          placeholder="Password"
-          name="password"
-          formControlName="password"
-        />
+        <input matInput type="number" placeholder="Mobile" name="mobile" formControlName="mobile" />
+
+        <mat-error *ngIf="dataForm.controls['mobile'].hasError('required') &&
+        dataForm.controls['mobile'].touched">
+          <h6>Please enter your mobile number</h6>
+        </mat-error>
+
       </mat-form-field>
+
+      <!-- password field  -->
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Password" name="password" formControlName="password" />
+
+        <mat-error *ngIf="dataForm.controls['password'].hasError('required') &&
+        dataForm.controls['password'].touched">
+          <h6>Please enter your password</h6>
+        </mat-error>
+        
+        <mat-error *ngIf="!dataForm.controls['password'].hasError('required') &&
+        dataForm.controls['password'].hasError('pattern')">
+          <h6>Password should like <span><b>Lazy1</b></span> </h6>
+        </mat-error>
+        
+      </mat-form-field>
+
+
       <div class="row my-3">
         <a class="col" routerLink="/login">Already have an account</a>
       </div>
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="dataForm.invalid"
-        (click)="signup()"
-      >
+      <button mat-raised-button color="primary" [disabled]="dataForm.invalid" (click)="signup()">
         SignUp
       </button>
     </form>

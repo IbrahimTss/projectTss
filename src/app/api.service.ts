@@ -37,6 +37,7 @@ export class ApiService {
     );
   }
 
+
   editdata(data: any, id: number) {
     return this.http.put<any>('http://192.168.0.121:3350/signapi/' + id, data);
   }
@@ -45,7 +46,19 @@ export class ApiService {
     return this.http.delete<any>('http://192.168.0.121:3350/signapi/' + id);
   }
 
-  // showSuccess(message : string, title : string) {
-  //   this.toastr.success(message,title);
-  // }
+  // forgot password 
+
+  frgtdata(data: any) {
+    return this.http.get<any>('http://192.168.0.121:3350/signapi').pipe(
+      map((resp: any) => {
+        return resp.find(
+          (i: any) => i.email === data.email
+        );
+      })
+    );
+  }
+
+  resetdata(data: any, id: number) {
+    return this.http.put<any>('http://192.168.0.121:3350/signapi/' + id, data);
+  }
 }

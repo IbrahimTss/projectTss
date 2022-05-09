@@ -12,6 +12,13 @@
           name="email"
           formControlName="email"
         />
+
+        
+        <mat-error *ngIf="loginForm.controls['email'].hasError('required') &&
+        loginForm.controls['email'].touched">
+          <h6>Please enter your email address</h6>
+        </mat-error>
+
       </mat-form-field>
       <mat-form-field>
         <input
@@ -21,10 +28,16 @@
           name="password"
           formControlName="password"
         />
+
+        <mat-error *ngIf="loginForm.controls['password'].hasError('required') &&
+        loginForm.controls['password'].touched">
+          <h6>Please enter your password</h6>
+        </mat-error>
+
       </mat-form-field>
 
       <!-- Links  -->
-      
+
       <div class="row my-3">
         <a class="col" routerLink="/signup">Don't have an account</a>
         <a class="col text-end" routerLink="/forgot-password"

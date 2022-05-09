@@ -14,6 +14,7 @@ import { EditDetailsComponent } from '../edit-details/edit-details.component';
 })
 export class UserDetailComponent implements OnInit {
   displayedColumns: string[] = [
+    'Id',
     'Name',
     'Email',
     'Mobile',

@@ -15,11 +15,11 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private api: ApiService,
     private toastr: NotificationService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('userData', JSON.stringify(res));
             this.router.navigate(['/navbar']);
           } else {
-            this.toastr.showError('Check Your Password', 'Invalid');
+            this.toastr.showError('Check Your Email & Password', 'Invalid');
             this.loginForm.reset();
           }
         },

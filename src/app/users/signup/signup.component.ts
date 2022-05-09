@@ -21,10 +21,11 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      mobile: new FormControl('', [Validators.required,Validators.minLength(10)]),
-      password: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(8)]),
+      name: new FormControl('', [Validators.required,Validators.pattern('^[a-z-A-Z]+$')]),
+      email: new FormControl('', [Validators.required, Validators.email,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]),
+      mobile: new FormControl('', [Validators.required]),
+      password: new FormControl('',[Validators.required,Validators.minLength(5),
+        Validators.maxLength(8),Validators.pattern('^(?=.*[a-z-A-Z])(?=.*[A-Z-a-z])(?=.*[0-9])[a-zA-Z0-9]+$')]),
     });
   }
   //  signup data
