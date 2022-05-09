@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
           
           if(res){
             this.loginForm.valid === true
-            this.api.showSuccess('','login sucessfully ')
+            // this.api.showSuccess('','login sucessfully ')
             localStorage.setItem('userData', JSON.stringify(res))
             this.router.navigate(["/navbar"])
 

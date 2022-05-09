@@ -11,7 +11,6 @@ import { ApiService } from 'src/app/api.service';
 })
 export class SignupComponent implements OnInit {
   public dataForm!: FormGroup;
-
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -22,15 +21,8 @@ export class SignupComponent implements OnInit {
     this.dataForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      mobile: new FormControl('', [
-        Validators.required,
-        Validators.minLength(10),
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(8),
-      ]),
+      mobile: new FormControl('', [Validators.required,Validators.minLength(10)]),
+      password: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(8)]),
     });
   }
   //  signup data

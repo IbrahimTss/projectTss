@@ -7,6 +7,11 @@ import { EditDetailsComponent } from './dash-board/edit-details/edit-details.com
 
 const routes: Routes = [
   {
+    path:'',
+    redirectTo:'login',
+    pathMatch:'full'
+  },
+  {
     path: 'users',
     loadChildren: () => import('./users/user.module').then((m) => m.UserModule),
   },
