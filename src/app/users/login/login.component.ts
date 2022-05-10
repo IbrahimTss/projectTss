@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit {
         next: (res) => {
           if (res) {
             this.loginForm.valid === true;
-            // this.api.showSuccess('','login sucessfully ')
+            this.toastr.showSuccess(' sucessfully ', 'Login');
             localStorage.setItem('userData', JSON.stringify(res));
             this.router.navigate(['/navbar']);
           } else {
-            // this.toastr.error('Check Your Password')
+            this.toastr.showError('Check Your Password', 'Invalid');
             this.loginForm.reset();
           }
         },
