@@ -2,6 +2,9 @@
   <mat-card fxFlex="40">
     <mat-toolbar><span class="title-center">Login Page</span></mat-toolbar>
     <form [formGroup]="loginForm" fxLayoutAlign="stretch" fxLayout="column">
+
+      <!-- input field  -->
+
       <mat-form-field>
         <input
           matInput
@@ -19,6 +22,9 @@
           formControlName="password"
         />
       </mat-form-field>
+
+      <!-- Links  -->
+      
       <div class="row my-3">
         <a class="col" routerLink="/signup">Don't have an account</a>
         <a class="col text-end" routerLink="/forgot-password"
