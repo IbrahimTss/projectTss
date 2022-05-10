@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import { NotificationService } from 'src/app/notification.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +16,7 @@ export class SignupComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
+    private toastr: NotificationService,
     private api: ApiService
   ) {}
 
@@ -41,18 +43,16 @@ export class SignupComponent implements OnInit {
         next: (res) => {
           if (res) {
             this.dataForm.valid === true;
-            // this.api.showSuccess('','login sucessfully ')
-            // localStorage.setItem('userData', JSON.stringify(res))
+            this.toastr.showSuccess(' sucessfully ', 'Signup');
             this.router.navigate(['/login']);
           } else {
-            // this.toastr.error('Check Your Password')
+            this.toastr.showError('Check Your Password', 'Invalid');
             this.dataForm.reset();
           }
         },
-        // error:()=>{
-        //   this.toastr.error('Somthing went wrong!')
-
-        // }
+        error: () => {
+          this.toastr.showError('Somthing went wrong!', 'Error');
+        },
       });
     }
   }

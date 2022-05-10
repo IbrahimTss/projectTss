@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/api.service';
+import { NotificationService } from 'src/app/notification.service';
 
 @Component({
   selector: 'app-edit-details',
@@ -14,7 +15,8 @@ export class EditDetailsComponent implements OnInit {
   constructor(
     private api: ApiService,
     @Inject(MAT_DIALOG_DATA) public editData: any,
-    private dialogRef: MatDialogRef<EditDetailsComponent>
+    private dialogRef: MatDialogRef<EditDetailsComponent>,
+    private toastr: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -36,15 +38,19 @@ export class EditDetailsComponent implements OnInit {
     }
   }
   saveForm() {
-    this.api.editdata(this.editForm.value, this.editData.id).subscribe({
-      next: (res) => {
-        alert('Product updated successfully');
-        // this.editForm.reset();
-        this.dialogRef.close('updated');
-      },
-      error: () => {
-        alert('Error while Updating product');
-      },
-    });
+    if (this.editForm.valid) {
+      this.api.editdata(this.editForm.value, this.editData.id).subscribe({
+        next: (res) => {
+          if (res) {
+            this.editForm.valid === true;
+            this.toastr.showSuccess(' sucessfully ', 'Updated');
+            this.dialogRef.close('updated');
+          }
+        },
+        error: () => {
+          this.toastr.showError('Somthing went wrong!', 'Error');
+        },
+      });
+    }
   }
 }
