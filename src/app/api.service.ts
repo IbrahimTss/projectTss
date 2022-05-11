@@ -41,12 +41,6 @@ export class ApiService {
     return this.http.post<any>('/users/login', data);
   }
 
-  // logout data 
-  logdata(data:any){
-    return this.http.delete<any>('/users/login',data)
-  }
-
-
 // edit data 
   editdata(data: any, id: number) {
     return this.http.put<any>('/users/' + id, data);
@@ -61,7 +55,7 @@ export class ApiService {
   // forgot password 
 
   frgtdata(data: any) {
-    return this.http.get<any>('/signapi').pipe(
+    return this.http.get<any>('/users').pipe(
       map((resp: any) => {
         return resp.find(
           (i: any) => i.email === data.email
@@ -73,6 +67,6 @@ export class ApiService {
   // reset password 
 
   resetdata(data: any, id: number) {
-    return this.http.put<any>('/signapi/reset_password' + id, data);
+    return this.http.put<any>('/users/reset_password' + id, data);
   }
 }
