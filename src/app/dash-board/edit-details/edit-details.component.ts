@@ -24,17 +24,17 @@ export class EditDetailsComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       mobile: new FormControl('', [Validators.required]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(8),
-      ]),
+      // password: new FormControl('', [
+      //   Validators.required,
+      //   Validators.minLength(5),
+      //   Validators.maxLength(8),
+      // ]),
     });
     if (this.editData) {
       this.editForm.controls['name'].setValue(this.editData.name);
       this.editForm.controls['email'].setValue(this.editData.email);
       this.editForm.controls['mobile'].setValue(this.editData.mobile);
-      this.editForm.controls['password'].setValue(this.editData.password);
+      // this.editForm.controls['password'].setValue(this.editData.password);
     }
   }
   saveForm() {

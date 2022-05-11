@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit {
             this.loginForm.reset();
           }
         },
-        error: () => {
-          this.toastr.showError('Check your network', 'Error');
+        error: (err) => {
+          this.toastr.showError(err.message, 'Error');
         },
       });
     }

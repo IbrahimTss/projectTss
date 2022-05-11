@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from './users/user.module';
 import { UserDetailComponent } from './dash-board/user-detail/user-detail.component';
 import { NavbarComponent } from './dash-board/navbar/navbar.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './dash-board/auth.guard';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +20,7 @@ import { EditDetailsComponent } from './dash-board/edit-details/edit-details.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpInterceptorService } from './interceptors/http.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,11 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpInterceptorService,
+    multi: true,
+  },],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

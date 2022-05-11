@@ -10,46 +10,58 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ApiService {
-  showSuccess(arg0: string, arg1: string) {
-    throw new Error('Method not implemented.');
-  }
-  login() {
-    throw new Error('Method not implemented.');
-  }
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  putdata(data: any) {
-    return this.http.post<any>('http://192.168.0.121:3350/signapi', data);
+// signup data 
+  insertdata(data: any) {
+    return this.http.post<any>('/users/register', data);
   }
+
+// get data 
 
   getAlldata() {
-    return this.http.get<any>('http://192.168.0.121:3350/signapi');
+    return this.http.get<any>('/users');
   }
 
+// get data verification 
+
+  // getdata(data: any) {
+  //   return this.http.get<any>('/users/login').pipe(
+  //     map((resp: any) => {
+  //       return resp.find(
+  //         (i: any) => i.email === data.email && i.password === data.password
+  //       );
+  //     })
+  //   );
+  // }
+
+  // login data 
   getdata(data: any) {
-    return this.http.get<any>('http://192.168.0.121:3350/signapi').pipe(
-      map((resp: any) => {
-        return resp.find(
-          (i: any) => i.email === data.email && i.password === data.password
-        );
-      })
-    );
+    return this.http.post<any>('/users/login', data);
+  }
+
+  // logout data 
+  logdata(data:any){
+    return this.http.delete<any>('/users/login',data)
   }
 
 
+// edit data 
   editdata(data: any, id: number) {
-    return this.http.put<any>('http://192.168.0.121:3350/signapi/' + id, data);
+    return this.http.put<any>('/users/' + id, data);
   }
+
+  // delete data 
 
   deleteproduct(id: number) {
-    return this.http.delete<any>('http://192.168.0.121:3350/signapi/' + id);
+    return this.http.delete<any>('/users/' + id);
   }
 
   // forgot password 
 
   frgtdata(data: any) {
-    return this.http.get<any>('http://192.168.0.121:3350/signapi').pipe(
+    return this.http.get<any>('/signapi').pipe(
       map((resp: any) => {
         return resp.find(
           (i: any) => i.email === data.email
@@ -58,7 +70,9 @@ export class ApiService {
     );
   }
 
+  // reset password 
+
   resetdata(data: any, id: number) {
-    return this.http.put<any>('http://192.168.0.121:3350/signapi/' + id, data);
+    return this.http.put<any>('/signapi/reset_password' + id, data);
   }
 }
