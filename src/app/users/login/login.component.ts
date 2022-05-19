@@ -15,11 +15,15 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private api: ApiService,
     private toastr: NotificationService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+      ]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -34,16 +38,18 @@ export class LoginComponent implements OnInit {
         next: (res) => {
           if (res) {
             this.loginForm.valid === true;
-            this.toastr.showSuccess(' sucessfully ', 'Login');
+            this.toastr.showSuccess(res.error.message);
             localStorage.setItem('userData', JSON.stringify(res));
             this.router.navigate(['/navbar']);
-          } else {
-            this.toastr.showError('Check Your Email & Password', 'Invalid');
-            this.loginForm.reset();
           }
+          // else {
+          //   this.toastr.showError('Check Your Email & Password', 'Invalid');
+          //   this.loginForm.reset();
+          // }
         },
         error: (err) => {
-          this.toastr.showError(err.message, 'Error');
+          this.loginForm.reset();
+          this.toastr.showError(err.message);
         },
       });
     }
