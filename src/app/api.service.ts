@@ -55,18 +55,19 @@ export class ApiService {
   // forgot password 
 
   frgtdata(data: any) {
-    return this.http.get<any>('/users').pipe(
-      map((resp: any) => {
-        return resp.find(
-          (i: any) => i.email === data.email
-        );
-      })
-    );
+    return this.http.post<any>('/users/forgot_password',data)
+    // .pipe(
+    //   map((resp: any) => {
+    //     return resp.find(
+    //       (i: any) => i.email === data.email
+    //     );
+    //   })
+    // );
   }
 
   // reset password 
 
   resetdata(data: any, id: number) {
-    return this.http.put<any>('/users/reset_password' + id, data);
+    return this.http.post<any>('/users/reset_password' + id, data);
   }
 }
