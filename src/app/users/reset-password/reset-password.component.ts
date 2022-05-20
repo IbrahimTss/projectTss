@@ -66,6 +66,7 @@ import { NotificationService } from 'src/app/notification.service';
 // }
 export class ResetPasswordComponent implements OnInit, OnDestroy {
   userId: any;
+  userEmail: any;
   error: string | undefined;
   isLoading: boolean | undefined;
   public resetForm!: FormGroup;
@@ -83,8 +84,13 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.userId = params['userId'];
+      this.userEmail = params['email'];
+      console.log('userEmail', this.userEmail)
     });
+    if(!this.userEmail){
+     return
+    }
+
     this.resetForm = this.formBuilder.group(
       {
         new_password: ['', [Validators.required, Validators.minLength(6)]],
@@ -117,20 +123,22 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     }
     let form = this.resetForm.value;
     let params = {
-      id: this.userId,
-      password: form.password,
+      email: this.userEmail,
+      new_password: form.new_password,
       confirm_password: form.confirm_password,
     };
+    console.log(params)
+  
     this.api.resetPassword(params).subscribe(
       (resp: any) => {
         if (resp) {
           console.log(resp);
-
           this.toastr.showSuccess(resp.message);
           this.router.navigate(['/login']);
         }
       },
       async (error: any) => {
+        this.resetForm.reset();
         this.toastr.showError(error.message);
       }
     );
@@ -140,3 +148,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 }
+function id(params: { id: any; password: any; confirm_password: any; }, id: any) {
+  throw new Error('Function not implemented.');
+}
+

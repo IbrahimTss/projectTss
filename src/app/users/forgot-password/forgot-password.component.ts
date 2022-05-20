@@ -30,17 +30,14 @@ export class ForgotPasswordComponent implements OnInit {
           if (res) {
             this.forgotpass.valid === true;
             this.toastr.showSuccess(res.message);
-            // localStorage.setItem('userData', JSON.stringify(res));
             this.router.navigate(['/reset-password'], {
               queryParams: {
                 email: this.forgotpass.value.email,
-                id: this.forgotpass.value.id,
               },
             });
           }
         },
         (error: any) => {
-          // console.log('dfgdf', error);
           this.toastr.showError(error.message);
           this.forgotpass.reset();
         }

@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpInterceptorService } from './interceptors/http.interceptor';
+import { ActivatedRoute } from '@angular/router';
 
 @NgModule({
   declarations: [
