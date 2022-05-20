@@ -12,14 +12,15 @@ import { takeUntil, timeout, map, catchError, switchMap } from 'rxjs/operators';
 // import { parseResponse } from './../helpers';
 import { finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { parseResponse } from '../api.service';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
   private baseURL = environment.baseURL;
 
-  private jwtToken : any;
+  private jwtToken: any;
   private openURLs: Array<string> = ['/users/register', '/forgot_password'];
-  private defaultTimeout: number = 60;
+  private defaultTimeout: number = 10;
 
   constructor() {}
 
@@ -28,7 +29,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     console.log('testintercept');
- 
+
     if (this.openURLs.indexOf(req.url) > -1) {
       this.jwtToken = undefined;
     }
@@ -47,7 +48,7 @@ export class HttpInterceptorService implements HttpInterceptor {
       let userData = JSON.parse(localStorage.getItem('userData') || '');
       this.jwtToken = userData.token;
     } catch (error) {}
-    
+
     if (this.jwtToken) {
       return this.prepareUrlAndHeaders(req, next, skipLoader);
     }
@@ -85,8 +86,8 @@ export class HttpInterceptorService implements HttpInterceptor {
 
         return event;
       }),
-      catchError((error: HttpErrorResponse) => {
-        console.log('httperror', error);
+      catchError((res: HttpErrorResponse) => {
+        console.log('httperror', res);
 
         // if (error.status == 401) {
         //   this.appSettingsService.sessionExpire().then((flag) => {
@@ -96,12 +97,8 @@ export class HttpInterceptorService implements HttpInterceptor {
         //     }
         //   });
         // }
-
-        
-
-        return throwError(() => new Error(error.error));
-      }),
-    
+        return throwError(parseResponse(res.error));
+      })
     );
   }
 }

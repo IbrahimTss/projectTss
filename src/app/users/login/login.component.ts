@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
           if (res) {
             this.loginForm.valid === true;
             this.toastr.showSuccess(res.error.message);
+            console.log(res);
+
             localStorage.setItem('userData', JSON.stringify(res));
             this.router.navigate(['/navbar']);
           }

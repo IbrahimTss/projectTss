@@ -7,10 +7,9 @@ import { NotificationService } from 'src/app/notification.service';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent implements OnInit {
-
   public forgotpass!: FormGroup;
   constructor(
     private router: Router,
@@ -21,34 +20,31 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit(): void {
     this.forgotpass = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-     
     });
   }
   //  forgot api
   forgt(): void {
     if (this.forgotpass.valid) {
-      this.api.frgtdata(this.forgotpass.value).subscribe({
-        next: (res) => {
+      this.api.frgtdata(this.forgotpass.value).subscribe(
+        (res) => {
           if (res) {
             this.forgotpass.valid === true;
-            this.toastr.showSuccess('Matched sucessfully ', 'Email');
+            this.toastr.showSuccess(res.message);
             // localStorage.setItem('userData', JSON.stringify(res));
-            this.router.navigate(
-              ['/reset-password'],
-              {
-                queryParams: {email:this.forgotpass.value.email}
-              }
-            );
-          } else {
-            this.toastr.showError('The email you entered does not exists', 'Invalid');
-            this.forgotpass.reset();
+            this.router.navigate(['/reset-password'], {
+              queryParams: {
+                email: this.forgotpass.value.email,
+                id: this.forgotpass.value.id,
+              },
+            });
           }
         },
-        error: () => {
-          this.toastr.showError('Somthing went wrong!', 'Error');
-        },
-      });
+        (error: any) => {
+          // console.log('dfgdf', error);
+          this.toastr.showError(error.message);
+          this.forgotpass.reset();
+        }
+      );
     }
   }
-
 }

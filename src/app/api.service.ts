@@ -10,21 +10,20 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ApiService {
-
   constructor(private http: HttpClient, private router: Router) {}
 
-// signup data 
+  // signup data
   insertdata(data: any) {
     return this.http.post<any>('/users/register', data);
   }
 
-// get data 
+  // get data
 
   getAlldata() {
     return this.http.get<any>('/users');
   }
 
-// get data verification 
+  // get data verification
 
   // getdata(data: any) {
   //   return this.http.get<any>('/users/login').pipe(
@@ -36,38 +35,70 @@ export class ApiService {
   //   );
   // }
 
-  // login data 
+  // login data
   getdata(data: any) {
     return this.http.post<any>('/users/login', data);
   }
 
-// edit data 
+  // edit data
   editdata(data: any, id: number) {
     return this.http.put<any>('/users/' + id, data);
   }
 
-  // delete data 
+  // delete data
 
   deleteproduct(id: number) {
     return this.http.delete<any>('/users/' + id);
   }
 
-  // forgot password 
+  // forgot password
 
   frgtdata(data: any) {
-    return this.http.post<any>('/users/forgot_password',data)
-    // .pipe(
-    //   map((resp: any) => {
-    //     return resp.find(
-    //       (i: any) => i.email === data.email
-    //     );
-    //   })
-    // );
+    return this.http.post('/users/forgot_password', data).pipe(
+      map((resp: any) => {
+        // console.log('forgotRtes', resp, parseResponse(resp));
+        return parseResponse(resp);
+      })
+    );
   }
 
-  // reset password 
+  // reset password
 
-  resetdata(data: any, id: number) {
-    return this.http.post<any>('/users/reset_password' + id, data);
+  // resetdata(data: any, id: number) {
+  //   return this.http.post<any>('/users/reset_password' + id, data);
+  // }
+
+  resetPassword(params: any) {
+    return this.http.post('/users/reset_password', params).pipe(
+      map((resp) => {
+        return parseResponse(resp);
+      })
+    );
   }
+}
+export function parseResponse(resp: any): ResponseInterface {
+  let error = resp.error || {};
+
+  let response: ResponseInterface = {
+    status: true,
+    message: error.message || '',
+    data: resp.data || null,
+  };
+
+  if (resp.token) {
+    response.token = resp.token;
+  }
+
+  if (error.code && error.code != '0') {
+    response.status = false;
+  }
+
+  return response;
+}
+
+export interface ResponseInterface {
+  status?: boolean;
+  message?: string;
+  data?: any;
+  token?: string;
 }
