@@ -16,54 +16,7 @@ import { NotificationService } from 'src/app/notification.service';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss'],
 })
-// export class ResetPasswordComponent implements OnInit {
-//   public newpass!: FormGroup;
-//   editData: any;
-//   constructor(
-//     private api: ApiService,
-//     private toastr: NotificationService,
-//     private route: Router
-//   ) {}
 
-//   ngOnInit(): void {
-//     this.newpass = new FormGroup({
-//       new_password: new FormControl('', [
-//         Validators.required,
-//         Validators.minLength(5),
-//         Validators.maxLength(8),
-//       ]),
-//       confirm_password: new FormControl('', [
-//         Validators.required,
-//         Validators.minLength(5),
-//         Validators.maxLength(8),
-//       ]),
-//     });
-//     if (this.editData) {
-//       this.newpass.controls['password'].setValue(this.editData.new_password);
-//       this.newpass.controls['cnfrmpassword'].setValue(
-//         this.editData.confirm_password
-//       );
-//     }
-//   }
-//   signup() {
-//     if (this.newpass.valid) {
-//       this.api
-//         .editdata(this.newpass.value, this.editData.id.password)
-//         .subscribe({
-//           next: (res) => {
-//             if (res) {
-//               this.newpass.valid === true;
-//               this.toastr.showSuccess(' sucessfully ', 'Updated');
-//               this.route.navigate(['/login']);
-//             }
-//           },
-//           error: () => {
-//             this.toastr.showError('Somthing went wrong!', 'Error');
-//           },
-//         });
-//     }
-//   }
-// }
 export class ResetPasswordComponent implements OnInit, OnDestroy {
   userId: any;
   userEmail: any;
@@ -93,7 +46,8 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
     this.resetForm = this.formBuilder.group(
       {
-        new_password: ['', [Validators.required, Validators.minLength(6)]],
+        new_password: new FormControl('',[Validators.required,Validators.minLength(5),
+          Validators.maxLength(8),Validators.pattern('^(?=.*[a-z-A-Z])(?=.*[A-Z-a-z])(?=.*[0-9])[a-zA-Z0-9]+$')]),
         confirm_password: ['', Validators.required],
       },
       { validators: this.checkPasswords }
@@ -112,9 +66,6 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     }
   }
 
-  get f() {
-    return this.resetForm.controls;
-  }
 
   async onSubmit() {
     if (!this.resetForm.valid) {
@@ -147,8 +98,5 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-}
-function id(params: { id: any; password: any; confirm_password: any; }, id: any) {
-  throw new Error('Function not implemented.');
 }
 

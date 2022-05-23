@@ -1,32 +1,24 @@
 <div fxLayoutAlign="center center " fxFlexFill>
-  <mat-card fxFlex="40" class="shadow-lg">
-    <mat-toolbar><span class="title-center">Login Page</span></mat-toolbar>
+  <mat-card  class="col-lg-5 col-md-5 shadow-lg">
+    <mat-toolbar><span class="title-center">Login</span></mat-toolbar>
     <form [formGroup]="loginForm" fxLayoutAlign="stretch" fxLayout="column">
-      <!-- input field  -->
+      <!-- input email field  -->
 
       <mat-form-field>
-        <input
-          matInput
-          placeholder="Email"
-          name="email"
-          formControlName="email"
-        />
+        <input matInput placeholder="Email" name="email" formControlName="email" />
 
-        
+
         <mat-error *ngIf="loginForm.controls['email'].hasError('required') &&
         loginForm.controls['email'].touched">
           <h6>Please enter your email address</h6>
         </mat-error>
 
       </mat-form-field>
+
+      <!-- input password field  -->
+
       <mat-form-field>
-        <input
-          matInput
-          type="password"
-          placeholder="Password"
-          name="password"
-          formControlName="password"
-        />
+        <input matInput type="password" placeholder="Password" name="password" formControlName="password" />
 
         <mat-error *ngIf="loginForm.controls['password'].hasError('required') &&
         loginForm.controls['password'].touched">
@@ -39,16 +31,12 @@
 
       <div class="row my-3">
         <a class="col" routerLink="/signup">Don't have an account</a>
-        <a class="col text-end" routerLink="/forgot-password"
-          >Forgot Password</a
-        >
+        <a class="col text-end" routerLink="/forgot-password">Forgot Password</a>
       </div>
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="loginForm.invalid"
-        (click)="login()"
-      >
+
+      <!-- login button  -->
+      
+      <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">
         Login
       </button>
     </form>
