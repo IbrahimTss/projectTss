@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseURL: 'http://carenris.com/api'
+  baseURL: 'http://carenris.com/api/'
 };
 
 /*
